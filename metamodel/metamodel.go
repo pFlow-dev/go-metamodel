@@ -508,6 +508,11 @@ func (m *Model) Execute(initialVec ...Vector) Process {
 	default:
 		panic(fmt.Sprintf(UnexpectedArguments, 2, len(initialVec)))
 	}
+	if len(sm.state) == 0 {
+		sm.state = m.InitialVector()
+	} else if len(sm.state) != len(sm.capacity) {
+		sm.state = m.EmptyVector()
+	}
 	return sm
 }
 
